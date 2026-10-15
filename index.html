@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menna Elberry | Portfolio</title>
   <meta name="description" content="Menna Elberry's academic portfolio — Software Engineering student.">
-
   <style>
     :root {
       --bg: #0b0910;
@@ -17,77 +17,428 @@
       --muted: #b9aec7;
       --line: rgba(209, 173, 255, .18);
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       color: var(--text);
       background:
-        radial-gradient(ellipse at 85% 5%, rgba(126,72,177,.20), transparent 32rem),
-        radial-gradient(ellipse at 5% 40%, rgba(88,48,126,.12), transparent 28rem),
+        radial-gradient(ellipse at 85% 5%, rgba(126, 72, 177, .20), transparent 32rem),
+        radial-gradient(ellipse at 5% 40%, rgba(88, 48, 126, .12), transparent 28rem),
         var(--bg);
       font-family: Inter, "Segoe UI", Arial, sans-serif;
       line-height: 1.6;
     }
-
     a { color: inherit; text-decoration: none; }
     .wrap { width: min(1100px, calc(100% - 40px)); margin: auto; }
-
     header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(11,9,16,.86);
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(11, 9, 16, .86);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
     }
-
-    nav {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
+    nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     .logo { font-weight: 800; letter-spacing: .3px; }
     .logo span { color: var(--purple); }
     .nav-links { display: flex; gap: 24px; color: var(--muted); font-size: .94rem; }
     .nav-links a:hover { color: var(--purple-bright); }
-
-    .hero {
-      min-height: 76vh;
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      align-items: center;
-      gap: 60px;
-      padding: 76px 0 90px;
-    }
-
-    .eyebrow {
-      color: var(--purple-bright);
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: .78rem;
-    }
-
-    h1 {
-      font-size: clamp(2.7rem, 6vw, 5rem);
-      line-height: 1.05;
-      margin: 14px 0 20px;
-      letter-spacing: -2px;
-    }
-
+    .hero { min-height: 76vh; display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 60px; padding: 76px 0 90px; }
+    .eyebrow { color: var(--purple-bright); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: .78rem; }
+    h1 { font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1.05; margin: 14px 0 20px; letter-spacing: -2px; }
     h1 span { color: var(--purple); }
     .intro { color: var(--muted); font-size: 1.1rem; max-width: 610px; }
     .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 11px 18px; font-weight: 700; transition: .2s; }
+    .btn.primary { background: var(--purple); color: #160e20; border-color: var(--purple); }
+    .btn:hover { transform: translateY(-2px); border-color: var(--purple); }
+    .portrait-wrap { position: relative; width: min(100%, 360px); justify-self: center; }
+    .portrait-wrap::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; border: 1px solid var(--purple); border-radius: 28px; opacity: .65; }
+    .portrait { display: block; position: relative; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 35%; border-radius: 28px; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 24px 80px rgba(0,0,0,.45); }
+    section { padding: 70px 0; }
+    .section-head { margin-bottom: 28px; }
+    .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 5px 0; }
+    .section-head p { color: var(--muted); margin: 0; }
+    .about-card { background: linear-gradient(135deg, rgba(29,23,40,.95), rgba(18,14,25,.95)); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+    .about-card p { color: var(--muted); margin: 0; }
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 26px; }
+    .filters select, .filters input { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; color: var(--text); padding: 12px 14px; font: inherit; outline: none; }
+    .filters input { flex: 1; min-width: 190px; }
+    .filters select:focus, .filters input:focus { border-color: var(--purple); }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .task { background: var(--panel); border: 1px solid var(--line); border-radius: 17px; padding: 22px; transition: .2s; min-height: 200px; display: flex; flex-direction: column; }
+    .task:hover { transform: translateY(-4px); border-color: rgba(185,138,255,.6); background: var(--panel-2); }
+    .task-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .file-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: rgba(185,138,255,.13); color: var(--purple-bright); font-weight: 800; font-size: .78rem; }
+    .tag { font-size: .75rem; color: var(--purple-bright); background: rgba(185,138,255,.1); padding: 5px 9px; border-radius: 99px; }
+    .task h3 { margin: 17px 0 5px; font-size: 1.08rem; }
+    .task p { color: var(--muted); font-size: .91rem; margin: 0 0 18px; }
+    .task-link { margin-top: auto; color: var(--purple-bright); font-weight: 700; font-size: .9rem; }
+    .empty { color: var(--muted); padding: 20px 0; display: none; }
+    .admin-box { margin: 28px 0; padding: 22px; background: var(--panel); border: 1px solid var(--line); border-radius: 17px; }
+    .admin-box h3 { margin-top: 0; }
+    .admin-form { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .admin-form input, .admin-form select, .admin-form textarea { width: 100%; min-width: 0; background: #0f0c15; color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px; font: inherit; }
+    .admin-form textarea { min-height: 82px; grid-column: 1 / -1; }
+    .admin-form .wide { grid-column: 1 / -1; }
+    .admin-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+    .admin-status { color: var(--muted); font-size: .9rem; white-space: pre-wrap; }
+    .admin-item { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 0; border-top:1px solid var(--line); }
+    .admin-item button, .btn.small { cursor:pointer; background:transparent; color:var(--purple-bright); border:1px solid var(--line); border-radius:9px; padding:7px 10px; }
+    .hidden { display:none !important; }
+    @media (max-width:560px) { .admin-form { grid-template-columns:1fr; } .admin-form textarea,.admin-form .wide { grid-column:auto; } .admin-item { align-items:flex-start; flex-direction:column; } }
+    .contact { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 28px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .contact p { color: var(--muted); margin: 4px 0 0; }
+    footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted); font-size: .9rem; }
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; gap: 42px; padding-top: 56px; text-align: center; }
+      .intro { margin-inline: auto; }
+      .actions { justify-content: center; }
+      .portrait-wrap { width: min(75%, 320px); }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, 1100px); }
+      .nav-links { gap: 12px; font-size: .82rem; }
+      .logo { font-size: .92rem; }
+      .grid { grid-template-columns: 1fr; }
+      section { padding: 52px 0; }
+      .portrait-wrap { width: min(82%, 300px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap">
+      <a class="logo" href="#home">MENNA<span>.</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#work">My Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-    .btn {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid var(--line);
-      border-radius:
+  <main>
+    <section class="hero wrap" id="home">
+      <div>
+        <div class="eyebrow">Portfolio · 2026</div>
+        <h1>Hi, I'm <span>Menna Elberry</span></h1>
+        <p class="intro">I'm a Computer Science student specializing in Software Engineering. This portfolio brings together my university tasks, projects, and the skills I'm building along the way.</p>
+        <div class="actions">
+          <a class="btn primary" href="#work">Explore My Work ↘</a>
+          <a class="btn" href="#about">A Little About Me</a>
+        </div>
+      </div>
+      <div class="portrait-wrap">
+        <img class="portrait" src="profile.jpg" alt="Portrait of Menna Elberry">
+      </div>
+    </section>
+
+    <section class="wrap" id="about">
+      <div class="section-head">
+        <div class="eyebrow">Get to know me</div>
+        <h2>About Me</h2>
+      </div>
+      <div class="about-card">
+        <p>I'm studying Computer Science with a focus on Software Engineering. I enjoy learning how software is designed and built, solving problems, and turning what I learn into practical work. Here you'll find my academic tasks organized by course and file type.</p>
+      </div>
+    </section>
+
+    <section class="wrap" id="work">
+      <div class="section-head">
+        <div class="eyebrow">Things I've worked on</div>
+        <h2>My Work</h2>
+        <p>Browse tasks by course or file type. Replace the sample cards with your real assignments.</p>
+      </div>
+      <div class="filters">
+        <input id="search" type="search" placeholder="Search tasks..." aria-label="Search tasks">
+        <select id="courseFilter" aria-label="Filter by course">
+          <option value="all">All courses</option>
+          <option value="course-01">Course 01</option>
+          <option value="course-02">Course 02</option>
+          <option value="course-03">Course 03</option>
+        </select>
+        <select id="typeFilter" aria-label="Filter by file type">
+          <option value="all">All file types</option>
+          <option value="pdf">PDFs</option>
+          <option value="image">Images</option>
+          <option value="presentation">Presentations</option>
+          <option value="document">Documents</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="admin-box" id="adminBox">
+        <h3>Admin access</h3>
+        <p class="admin-status">Sign in to manage the tasks shown on this portfolio.</p>
+        <form id="loginForm" class="admin-form">
+          <input id="adminEmail" type="email" placeholder="Admin email" autocomplete="username" required>
+          <input id="adminPassword" type="password" placeholder="Password" autocomplete="current-password" required>
+          <button class="btn primary wide" type="submit">Sign in</button>
+        </form>
+        <div id="adminPanel" class="hidden">
+          <div class="admin-actions"><button type="button" class="btn small" id="logoutBtn">Sign out</button></div>
+          <h3 id="formHeading">Add a task</h3>
+          <form id="taskForm" class="admin-form">
+            <input id="taskTitle" placeholder="Task title" required maxlength="160">
+            <select id="taskCourse" required><option value="Course 01">Course 01</option><option value="Course 02">Course 02</option><option value="Course 03">Course 03</option></select>
+            <select id="taskType" required><option value="pdf">PDF</option><option value="image">Image</option><option value="presentation">Presentation</option><option value="document">Document</option><option value="other">Other</option></select>
+            <input id="taskLink" type="url" placeholder="File link (optional) — use this OR upload">
+            <textarea id="taskDescription" placeholder="Short description" maxlength="1000"></textarea>
+            <label class="wide">Or upload a file <input id="taskFile" type="file" class="wide"></label>
+            <div class="admin-actions wide"><button class="btn primary" type="submit" id="saveTaskBtn">Save task</button><button class="btn" type="button" id="cancelEditBtn">Cancel edit</button></div>
+          </form>
+          <h3>Manage existing tasks</h3><div id="adminTaskList"></div>
+        </div>
+        <p id="adminStatus" class="admin-status" role="status"></p>
+      </div>
+      <div class="grid" id="taskGrid"></div>
+      <p class="empty" id="emptyMessage">No tasks match your filters. Try another search.</p>
+    </section>
+
+    <section class="wrap" id="contact">
+      <div class="section-head">
+        <div class="eyebrow">Let's connect</div>
+        <h2>Contact</h2>
+      </div>
+      <div class="contact">
+        <div><strong>Have a question or want to connect?</strong><p>Replace the email address with your preferred contact email.</p></div>
+        <a class="btn primary" href="mailto:your.email@example.com">Email Me ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">© 2026 Menna Elberry · Built with care.</div></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://fcmfraohyrnbpxxsxyne.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_J02J7KcZ-quU0ORjOTIa8w_ETHnqmp5';
+    const ADMIN_UID = 'bce1df6b-5b95-417c-af00-ffc8e27df688';
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const searchInput = document.getElementById('search');
+    const courseFilter = document.getElementById('courseFilter');
+    const typeFilter = document.getElementById('typeFilter');
+    const taskGrid = document.getElementById('taskGrid');
+    const emptyMessage = document.getElementById('emptyMessage');
+    const adminStatus = document.getElementById('adminStatus');
+    const loginForm = document.getElementById('loginForm');
+    const adminPanel = document.getElementById('adminPanel');
+    const adminTaskList = document.getElementById('adminTaskList');
+    let tasks = [], editingId = null, currentUser = null;
+
+    function typeLabel(type) {
+      return ({pdf:'PDF', image:'Image', presentation:'Presentation', document:'Document', other:'Other'})[type] || type || 'File';
+    }
+    function iconLabel(type) {
+      return ({pdf:'PDF', image:'IMG', presentation:'PPT', document:'DOC', other:'FILE'})[type] || 'FILE';
+    }
+    function safeUrl(url) {
+      try {
+        const u = new URL(url);
+        return ['https:','http:'].includes(u.protocol) ? u.href : '#';
+      } catch { return '#'; }
+    }
+    function escapeHtml(v) {
+      return String(v ?? '').replace(/[&<>"']/g, c => ({
+        '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+      }[c]));
+    }
+    function escapeAttr(v) { return escapeHtml(v); }
+
+    function renderTasks() {
+      const query = searchInput.value.trim().toLowerCase();
+      const course = courseFilter.value, type = typeFilter.value;
+      const visible = tasks.filter(t => {
+        const c = String(t.course || '').toLowerCase().replaceAll(' ','-');
+        return (`${t.title||''} ${t.description||''} ${t.course||''} ${t.type||''}`).toLowerCase().includes(query)
+          && (course === 'all' || c === course)
+          && (type === 'all' || t.type === type);
+      });
+      taskGrid.innerHTML = visible.map(t => `
+        <article class="task">
+          <div class="task-top">
+            <div class="file-icon">${iconLabel(t.type)}</div>
+            <span class="tag">${escapeHtml(t.course||'Course')}</span>
+          </div>
+          <h3>${escapeHtml(t.title||'Untitled task')}</h3>
+          <p>${escapeHtml(t.description||'')}</p>
+          <a class="task-link" href="${escapeAttr(safeUrl(t.file_url))}" target="_blank" rel="noopener noreferrer">
+            Open ${escapeHtml(typeLabel(t.type).toLowerCase())} ↗
+          </a>
+        </article>`).join('');
+      emptyMessage.style.display = visible.length ? 'none' : 'block';
+    }
+
+    async function loadTasks() {
+      try {
+        const { data, error } = await supabase.from('tasks').select('*').order('created_at', { ascending: false });
+        if (error) throw error;
+        tasks = data || [];
+        renderTasks();
+        renderAdminList();
+      } catch (err) {
+        adminStatus.textContent = 'Could not load tasks: ' + (err.message || String(err));
+        tasks = [];
+        renderTasks();
+      }
+    }
+
+    function renderAdminList() {
+      if (!currentUser || currentUser.id !== ADMIN_UID) {
+        adminTaskList.innerHTML = '';
+        return;
+      }
+      adminTaskList.innerHTML = tasks.map(t => `
+        <div class="admin-item">
+          <div><strong>${escapeHtml(t.title)}</strong><br>
+          <small>${escapeHtml(t.course)} · ${escapeHtml(typeLabel(t.type))}</small></div>
+          <div class="admin-actions">
+            <button type="button" data-edit="${escapeAttr(t.id)}">Edit</button>
+            <button type="button" data-delete="${escapeAttr(t.id)}">Delete</button>
+          </div>
+        </div>`).join('') || '<p class="admin-status">No tasks added yet.</p>';
+    }
+
+    function setAdminState(user) {
+      currentUser = user;
+      const isAdmin = !!user && user.id === ADMIN_UID;
+      loginForm.classList.toggle('hidden', isAdmin);
+      adminPanel.classList.toggle('hidden', !isAdmin);
+      if (user && !isAdmin) adminStatus.textContent = 'This account is not authorized as the portfolio admin.';
+      else if (isAdmin) adminStatus.textContent = 'Signed in as admin.';
+      renderAdminList();
+    }
+
+    function resetTaskForm() {
+      editingId = null;
+      document.getElementById('taskForm').reset();
+      document.getElementById('formHeading').textContent = 'Add a task';
+      document.getElementById('saveTaskBtn').textContent = 'Save task';
+      document.getElementById('cancelEditBtn').classList.add('hidden');
+    }
+
+    loginForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      adminStatus.textContent = 'Signing in…';
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: document.getElementById('adminEmail').value.trim(),
+          password: document.getElementById('adminPassword').value
+        });
+        if (error) throw error;
+        if (data.user.id !== ADMIN_UID) {
+          await supabase.auth.signOut();
+          setAdminState(null);
+          adminStatus.textContent = 'This account is not authorized as admin.';
+          return;
+        }
+        setAdminState(data.user);
+        await loadTasks();
+      } catch (err) {
+        adminStatus.textContent = 'Sign-in failed: ' + (err.message || String(err));
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      setAdminState(null);
+      adminStatus.textContent = 'Signed out.';
+    });
+
+    document.getElementById('taskForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!currentUser || currentUser.id !== ADMIN_UID) {
+        adminStatus.textContent = 'Please sign in as admin first.';
+        return;
+      }
+      const btn = document.getElementById('saveTaskBtn');
+      btn.disabled = true;
+      adminStatus.textContent = 'Saving task…';
+      let fileUrl = document.getElementById('taskLink').value.trim();
+      const file = document.getElementById('taskFile').files[0];
+      try {
+        if (file) {
+          const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+          const path = `${currentUser.id}/${Date.now()}-${cleanName}`;
+          const { error: uploadError } = await supabase.storage.from('tasks-files').upload(path, file, {upsert:false});
+          if (uploadError) throw uploadError;
+          const { data: urlData } = supabase.storage.from('tasks-files').getPublicUrl(path);
+          fileUrl = urlData.publicUrl;
+        }
+        if (!fileUrl) throw new Error('Add a file link or choose a file to upload.');
+        const record = {
+          title: document.getElementById('taskTitle').value.trim(),
+          course: document.getElementById('taskCourse').value,
+          type: document.getElementById('taskType').value,
+          description: document.getElementById('taskDescription').value.trim(),
+          file_url: fileUrl
+        };
+        const result = editingId
+          ? await supabase.from('tasks').update(record).eq('id', editingId)
+          : await supabase.from('tasks').insert(record);
+        if (result.error) throw result.error;
+        adminStatus.textContent = 'Task saved successfully.';
+        resetTaskForm();
+        await loadTasks();
+      } catch (err) {
+        adminStatus.textContent = 'Could not save task: ' + (err.message || String(err));
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    document.getElementById('cancelEditBtn').addEventListener('click', resetTaskForm);
+
+    adminTaskList.addEventListener('click', async e => {
+      const editBtn = e.target.closest('[data-edit]');
+      const deleteBtn = e.target.closest('[data-delete]');
+      if (editBtn) {
+        const t = tasks.find(x => String(x.id) === editBtn.dataset.edit);
+        if (!t) return;
+        editingId = t.id;
+        document.getElementById('taskTitle').value = t.title || '';
+        document.getElementById('taskCourse').value = t.course || 'Course 01';
+        document.getElementById('taskType').value = t.type || 'other';
+        document.getElementById('taskDescription').value = t.description || '';
+        document.getElementById('taskLink').value = t.file_url || '';
+        document.getElementById('taskFile').value = '';
+        document.getElementById('formHeading').textContent = 'Edit task';
+        document.getElementById('saveTaskBtn').textContent = 'Update task';
+        document.getElementById('cancelEditBtn').classList.remove('hidden');
+        window.scrollTo({top:document.getElementById('adminBox').offsetTop, behavior:'smooth'});
+      }
+      if (deleteBtn) {
+        const t = tasks.find(x => String(x.id) === deleteBtn.dataset.delete);
+        if (!t || !confirm(`Delete "${t.title}"?`)) return;
+        const { error } = await supabase.from('tasks').delete().eq('id', t.id);
+        if (error) {
+          adminStatus.textContent = 'Delete failed: ' + error.message;
+          return;
+        }
+        adminStatus.textContent = 'Task deleted.';
+        await loadTasks();
+      }
+    });
+
+    searchInput.addEventListener('input', renderTasks);
+    courseFilter.addEventListener('change', renderTasks);
+    typeFilter.addEventListener('change', renderTasks);
+
+    async function initialize() {
+      try {
+        const { data } = await supabase.auth.getSession();
+        setAdminState(data.session?.user || null);
+      } catch (err) {
+        adminStatus.textContent = 'Supabase session error: ' + (err.message || String(err));
+      }
+      await loadTasks();
+    }
+    initialize();
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setAdminState(session?.user || null);
+    });
+  </script>
+</body>
+</html>
