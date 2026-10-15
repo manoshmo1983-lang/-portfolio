@@ -1,627 +1,93 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menna | Portfolio</title>
+  <title>Menna Elberry | Portfolio</title>
+  <meta name="description" content="Menna Elberry's academic portfolio — Software Engineering student.">
 
   <style>
     :root {
-      --bg: #09080d;
-      --panel: #14111d;
-      --panel2: #1b1627;
-      --purple: #a970ff;
-      --light: #c9a8ff;
-      --text: #f5f1fc;
-      --muted: #aaa2b8;
-      --border: #30253f;
+      --bg: #0b0910;
+      --panel: #15111d;
+      --panel-2: #1d1728;
+      --purple: #b98aff;
+      --purple-bright: #d1adff;
+      --text: #f7f2ff;
+      --muted: #b9aec7;
+      --line: rgba(209, 173, 255, .18);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      background: radial-gradient(
-        circle at top right,
-        #211333 0,
-        var(--bg) 38rem
-      );
       color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(ellipse at 85% 5%, rgba(126,72,177,.20), transparent 32rem),
+        radial-gradient(ellipse at 5% 40%, rgba(88,48,126,.12), transparent 28rem),
+        var(--bg);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
       line-height: 1.6;
     }
 
-    a {
-      color: var(--light);
-    }
-
-    .container {
-      width: min(1100px, calc(100% - 36px));
-      margin: auto;
-    }
-
-    /* Navigation */
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1100px, calc(100% - 40px)); margin: auto; }
 
     header {
-      padding: 24px 0;
-    }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .logo {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .logo span,
-    h1 span {
-      color: var(--purple);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11,9,16,.86);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
     }
 
     nav {
+      min-height: 72px;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 20px;
-      flex-wrap: wrap;
     }
 
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    nav a:hover {
-      color: var(--purple);
-    }
-
-    /* Hero */
+    .logo { font-weight: 800; letter-spacing: .3px; }
+    .logo span { color: var(--purple); }
+    .nav-links { display: flex; gap: 24px; color: var(--muted); font-size: .94rem; }
+    .nav-links a:hover { color: var(--purple-bright); }
 
     .hero {
+      min-height: 76vh;
       display: grid;
-      grid-template-columns: 1.35fr 0.65fr;
+      grid-template-columns: 1.2fr .8fr;
       align-items: center;
-      gap: 40px;
-      padding: 64px 0 76px;
+      gap: 60px;
+      padding: 76px 0 90px;
     }
 
     .eyebrow {
-      color: var(--light);
+      color: var(--purple-bright);
+      font-weight: 700;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 0.8rem;
-      font-weight: bold;
+      font-size: .78rem;
     }
 
     h1 {
-      font-size: clamp(2.5rem, 7vw, 4.6rem);
-      line-height: 1.1;
-      margin: 12px 0 18px;
+      font-size: clamp(2.7rem, 6vw, 5rem);
+      line-height: 1.05;
+      margin: 14px 0 20px;
+      letter-spacing: -2px;
     }
 
-    .hero p,
-    .about p {
-      color: var(--muted);
-      max-width: 650px;
-    }
+    h1 span { color: var(--purple); }
+    .intro { color: var(--muted); font-size: 1.1rem; max-width: 610px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 24px;
-    }
-
-    .button {
-      display: inline-block;
-      background: var(--purple);
-      color: #130c1d;
-      padding: 11px 18px;
-      border-radius: 10px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: transform 0.2s;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .button.secondary {
-      background: transparent;
-      color: var(--light);
-      border: 1px solid var(--border);
-    }
-
-    .portrait-wrap {
-      display: flex;
+    .btn {
+      display: inline-flex;
       justify-content: center;
       align-items: center;
-    }
-
-    /* الصورة من غير إطار أو ظل */
-
-    .portrait {
-      width: min(280px, 72vw);
-      aspect-ratio: 1;
-      object-fit: cover;
-      object-position: center;
-      border: none;
-      outline: none;
-      box-shadow: none;
-      border-radius: 50%;
-      display: block;
-    }
-
-    /* Sections */
-
-    section {
-      padding: 42px 0;
-    }
-
-    .section-heading {
-      margin-bottom: 22px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(1.7rem, 4vw, 2.4rem);
-      margin: 0 0 6px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .about,
-    .tasks-panel {
-      background: rgba(20, 17, 29, 0.82);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 28px;
-    }
-
-    /* Search and filters */
-
-    .filters {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 12px;
-      margin: 20px 0;
-    }
-
-    input,
-    select {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #100d17;
-      color: var(--text);
-      font: inherit;
-    }
-
-    input:focus,
-    select:focus {
-      outline: 2px solid var(--purple);
-      outline-offset: 2px;
-    }
-
-    /* Task cards */
-
-    .task-count {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 14px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      background: var(--panel2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      min-height: 210px;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--purple);
-    }
-
-    .tag {
-      display: inline-flex;
-      align-self: flex-start;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: #302044;
-      color: var(--light);
-      font-size: 0.76rem;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 1.08rem;
-    }
-
-    .card p {
-      color: var(--muted);
-      margin: 0 0 18px;
-      font-size: 0.92rem;
-    }
-
-    .card a {
-      margin-top: auto;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .card a:hover {
-      text-decoration: underline;
-    }
-
-    .empty,
-    .error {
-      color: var(--muted);
-      background: var(--panel);
-      padding: 20px;
-      border-radius: 12px;
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-
-    /* Contact and footer */
-
-    .contact-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    footer {
-      padding: 36px 0 44px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      margin-top: 40px;
-    }
-
-    /* Mobile */
-
-    @media (max-width: 760px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 42px 0 54px;
-        gap: 26px;
-      }
-
-      .portrait-wrap {
-        grid-row: 1;
-        justify-content: flex-start;
-      }
-
-      .portrait {
-        width: 190px;
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .filters {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about,
-      .tasks-panel {
-        padding: 20px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <header class="container">
-    <div class="nav">
-      <a class="logo" href="#">Menna<span>.</span></a>
-
-      <nav>
-        <a href="#about">About</a>
-        <a href="#tasks">Tasks</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-
-    <!-- Hero -->
-    <section class="hero">
-      <div>
-        <div class="eyebrow">Computer Science Student</div>
-
-        <h1>Hi, I'm <span>Menna</span>.</h1>
-
-        <p>
-          I'm a Computer Science student specializing in
-          Software Engineering. I enjoy learning, building
-          projects, and turning ideas into practical solutions.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button" href="#tasks">Explore My Tasks</a>
-          <a class="button secondary" href="#contact">Contact Me</a>
-        </div>
-      </div>
-
-      <div class="portrait-wrap">
-        <img
-          class="portrait"
-          src="profile.jpg"
-          alt="Menna's portrait"
-        >
-      </div>
-    </section>
-
-    <!-- About Me -->
-    <section id="about">
-      <div class="section-heading">
-        <h2>About Me</h2>
-        <p>A little introduction</p>
-      </div>
-
-      <div class="about">
-        <p>
-          I'm studying Computer Science with a focus on
-          Software Engineering. This portfolio brings together
-          my university tasks and projects, organized by course
-          and file type so they're easy to browse.
-        </p>
-      </div>
-    </section>
-
-    <!-- Tasks -->
-    <section id="tasks">
-      <div class="section-heading">
-        <h2>My Tasks</h2>
-        <p>Browse my work by course or file type.</p>
-      </div>
-
-      <div class="tasks-panel">
-
-        <div class="filters">
-          <input
-            id="search"
-            type="search"
-            placeholder="Search tasks..."
-            aria-label="Search tasks"
-          >
-
-          <select id="course-filter" aria-label="Filter by course">
-            <option value="all">All courses</option>
-          </select>
-
-          <select id="type-filter" aria-label="Filter by file type">
-            <option value="all">All file types</option>
-            <option value="PDF">PDF</option>
-            <option value="Image">Image</option>
-            <option value="Presentation">Presentation</option>
-            <option value="Document">Document</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div id="task-count" class="task-count">
-          Loading tasks...
-        </div>
-
-        <div id="task-grid" class="grid" aria-live="polite"></div>
-
-        <p id="task-message" class="empty" hidden></p>
-
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <div class="section-heading">
-        <h2>Contact</h2>
-        <p>Let's connect.</p>
-      </div>
-
-      <div class="about contact-links">
-        <!-- Change these links to your own accounts -->
-        <a href="mailto:your.email@example.com">Email me</a>
-
-        <a
-          href="https://github.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >GitHub</a>
-
-        <a
-          href="https://www.linkedin.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >LinkedIn</a>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container">
-      © <span id="year"></span> Menna. Built with care.
-    </div>
-  </footer>
-
-  <script>
-    const grid = document.getElementById("task-grid");
-    const searchInput = document.getElementById("search");
-    const courseFilter = document.getElementById("course-filter");
-    const typeFilter = document.getElementById("type-filter");
-    const count = document.getElementById("task-count");
-    const message = document.getElementById("task-message");
-
-    let tasks = [];
-
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-
-    function addText(parent, tag, className, value) {
-      const element = document.createElement(tag);
-
-      if (className) {
-        element.className = className;
-      }
-
-      element.textContent = value || "";
-      parent.appendChild(element);
-
-      return element;
-    }
-
-    function renderTasks() {
-      const query = searchInput.value.trim().toLowerCase();
-      const selectedCourse = courseFilter.value;
-      const selectedType = typeFilter.value;
-
-      const filteredTasks = tasks.filter(task => {
-        const searchableText = (
-          task.title + " " +
-          task.course + " " +
-          task.description + " " +
-          task.type
-        ).toLowerCase();
-
-        return searchableText.includes(query) &&
-          (selectedCourse === "all" ||
-            task.course === selectedCourse) &&
-          (selectedType === "all" ||
-            task.type === selectedType);
-      });
-
-      grid.replaceChildren();
-
-      count.textContent =
-        filteredTasks.length +
-        (filteredTasks.length === 1 ? " task" : " tasks");
-
-      message.hidden = filteredTasks.length !== 0;
-
-      message.textContent = tasks.length === 0
-        ? "No tasks added yet. Add your first task to tasks.json."
-        : "No tasks match your search or filters.";
-
-      filteredTasks.forEach(task => {
-        const card = document.createElement("article");
-        card.className = "card";
-
-        addText(
-          card,
-          "span",
-          "tag",
-          task.course + " · " + task.type
-        );
-
-        addText(card, "h3", "", task.title);
-        addText(card, "p", "", task.description);
-
-        const link = document.createElement("a");
-        link.href = task.file;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = "Open task →";
-
-        card.appendChild(link);
-        grid.appendChild(card);
-      });
-    }
-
-    async function loadTasks() {
-      try {
-        const response = await fetch("./tasks.json");
-
-        if (!response.ok) {
-          throw new Error("Could not load tasks.json");
-        }
-
-        const data = await response.json();
-
-        if (!Array.isArray(data)) {
-          throw new Error("tasks.json must contain a list");
-        }
-
-        tasks = data.filter(task =>
-          task &&
-          typeof task.title === "string" &&
-          typeof task.course === "string" &&
-          typeof task.type === "string" &&
-          typeof task.description === "string" &&
-          typeof task.file === "string"
-        );
-
-        const courses = [
-          ...new Set(tasks.map(task => task.course))
-        ].sort();
-
-        courses.forEach(course => {
-          const option = document.createElement("option");
-          option.value = course;
-          option.textContent = course;
-          courseFilter.appendChild(option);
-        });
-
-        renderTasks();
-
-      } catch (error) {
-        count.textContent = "Tasks couldn't be loaded";
-        message.hidden = false;
-        message.className = "error";
-        message.textContent =
-          "Make sure tasks.json is in the same folder as index.html and open the website through GitHub Pages.";
-      }
-    }
-
-    searchInput.addEventListener("input", renderTasks);
-    courseFilter.addEventListener("change", renderTasks);
-    typeFilter.addEventListener("change", renderTasks);
-
-    loadTasks();
-  </script>
-
-</body>
-</html>
+      border: 1px solid var(--line);
+      border-radius:
